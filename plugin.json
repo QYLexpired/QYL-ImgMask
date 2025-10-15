@@ -1,0 +1,48 @@
+{
+  "name": "QYL-ImgMask",
+  "author": "QYL",
+  "url": "https://github.com/QYLexpired/QYL-ImgMask",
+  "version": "1.0",
+  "minAppVersion": "3.3.0",
+  "backends": [
+    "windows",
+    "linux",
+    "darwin",
+    "ios",
+    "android",
+    "harmony",
+    "docker"
+  ],
+  "frontends": [
+    "desktop",
+    "mobile",
+    "browser-desktop",
+    "browser-mobile",
+    "desktop-window"
+  ],
+  "displayName": {
+    "default": "QYL-ImgMask",
+    "zh_CN": "图片遮罩"
+  },
+  "description": {
+    "default": "Create masks on images for flashcard review",
+    "zh_CN": "在图片上创建遮罩，用于闪卡复习"
+  },
+  "readme": {
+    "default": "README.md",
+    "zh_CN": "README_zh_CN.md"
+  },
+  "funding": {
+    "openCollective": "",
+    "patreon": "",
+    "github": "",
+    "custom": [
+      "https://ifdian.net/a/QYLexpired"
+    ]
+  },
+  "keywords": [
+    "ImgMask",
+    "图片遮罩",
+    "图片挖空"
+  ]
+}
