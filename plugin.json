@@ -5,23 +5,14 @@
   "version": "1.0",
   "minAppVersion": "3.3.0",
   "backends": [
-    "windows",
-    "linux",
-    "darwin",
-    "ios",
-    "android",
-    "harmony",
-    "docker"
+    "all"
   ],
   "frontends": [
-    "desktop",
-    "mobile",
-    "browser-desktop",
-    "browser-mobile",
-    "desktop-window"
+    "all"
   ],
+  "disabledInPublish": false,
   "displayName": {
-    "default": "QYL-ImgMask",
+    "default": "Masks on images",
     "zh_CN": "图片遮罩"
   },
   "description": {
@@ -33,16 +24,11 @@
     "zh_CN": "README_zh_CN.md"
   },
   "funding": {
-    "openCollective": "",
-    "patreon": "",
-    "github": "",
     "custom": [
       "https://ifdian.net/a/QYLexpired"
     ]
   },
   "keywords": [
-    "ImgMask",
-    "图片遮罩",
     "图片挖空"
   ]
 }

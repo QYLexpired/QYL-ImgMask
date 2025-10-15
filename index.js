@@ -1,24 +1,18 @@
-
-
 const siyuan = require("siyuan");
-
 class Plugin extends siyuan.Plugin {
     constructor() {
         super(...arguments);
     }
-
-    
     onload() {
         this.initImgMask();
         this.observeImgChanges();
     }
-
-    
     onunload() {
         this.removeImgMask();
     }
-
-    
+    uninstall() {
+        this.removeImgMask();
+    }
     async loadImgMaskData(blockId) {
         const resp = await fetch('/api/attr/getBlockAttrs', {
             method: 'POST',
@@ -36,7 +30,6 @@ class Plugin extends siyuan.Plugin {
         }
         return [];
     }
-
     async saveImgMaskData(blockId, maskDataList) {
         const attrValue = JSON.stringify(maskDataList || []);
         await fetch('/api/attr/setBlockAttrs', {
@@ -45,12 +38,10 @@ class Plugin extends siyuan.Plugin {
             body: JSON.stringify({ id: blockId, attrs: { 'custom-imgmaskdata': attrValue } })
         });
     }
-
     getMasksForSrc(maskDataList, src) {
         let entry = maskDataList.find(item => item.src === src);
         return entry ? entry.masks : [];
     }
-
     setMasksForSrc(maskDataList, src, masks) {
         let entry = maskDataList.find(item => item.src === src);
         if (entry) {
@@ -59,7 +50,6 @@ class Plugin extends siyuan.Plugin {
             maskDataList.push({ src, masks });
         }
     }
-
     renderMasksForImg(img, ancestor, maskDataList, getDragMode, onDataChange) {
         img.parentNode.querySelectorAll('.QYLImgMaskRect').forEach(el => el.remove());
         this.getMasksForSrc(maskDataList, img.dataset.src).forEach((data, idx) => {
@@ -93,7 +83,6 @@ class Plugin extends siyuan.Plugin {
             }
         }
     }
-
     handleMaskClick(e, mask, getDragMode) {
         if (e.button !== 0) return;
         if (!getDragMode()) {
@@ -113,7 +102,6 @@ class Plugin extends siyuan.Plugin {
             }
         }
     }
-
     handleMaskMouseDown(e, mask, getDragMode, img, ancestor, maskDataList, refreshMasks, onDataChange) {
         if (e.button !== 0) return;
         if (!getDragMode()) return;
@@ -147,7 +135,6 @@ class Plugin extends siyuan.Plugin {
         document.addEventListener('mouseup', clear);
         document.addEventListener('mouseleave', clear);
     }
-
     setupCreateMaskHandler(img, ancestor, maskDataList, getDragMode, onDataChange) {
         if (!img.parentNode._QYLImgMaskBind) {
             img.parentNode.addEventListener('mousedown', function(e) {
@@ -164,7 +151,6 @@ class Plugin extends siyuan.Plugin {
             img.parentNode._QYLImgMaskBind = true;
         }
     }
-
     createShowAllButton(img, dragMode) {
         const showAllSpan = document.createElement('span');
         showAllSpan.className = 'protyle-custom QYLImgMaskShowAll';
@@ -202,7 +188,6 @@ class Plugin extends siyuan.Plugin {
         }.bind(this));
         return showAllSpan;
     }
-
     handleCreateMaskDrag(e, img, ancestor, maskDataList, getDragMode, onDataChange) {
         if (e.button !== 0) return;
         const self = this; 
@@ -279,11 +264,7 @@ class Plugin extends siyuan.Plugin {
             if (topPx + heightPx > img.offsetHeight - minPx) heightPx = img.offsetHeight - minPx - topPx;
             if (widthPx < 15 || heightPx < 15) {
                 mask.remove();
-                fetch('/api/notification/pushMsg', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ msg: self.i18n.imgMaskMaskTooSmall || '遮罩尺寸不能小于15像素', timeout: 3000 })
-                });
+                siyuan.showMessage(self.i18n.imgMaskMaskTooSmall || '遮罩尺寸不能小于15像素', 3000);
                 return;
             }
             let left = leftPx / img.offsetWidth;
@@ -311,7 +292,6 @@ class Plugin extends siyuan.Plugin {
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
     }
-
     async initImgMask() {
         if (typeof window !== 'undefined') {
             window._QYLImgMaskResizeObservers = window._QYLImgMaskResizeObservers || [];
@@ -392,7 +372,6 @@ class Plugin extends siyuan.Plugin {
             }
         });
     }
-
     removeImgMask() {
         document.querySelectorAll('.QYLImgMaskRect').forEach(el => el.remove());
         document.querySelectorAll('.QYLImgMaskButton').forEach(el => el.remove());
@@ -418,7 +397,6 @@ class Plugin extends siyuan.Plugin {
             window._QYLImgMaskResizeObservers = [];
         }
     }
-
     observeImgChanges() {
         let debounceTimer = null;
         const observer = new MutationObserver(mutations => {
@@ -450,5 +428,4 @@ class Plugin extends siyuan.Plugin {
         window._QYLImgMaskMutationObserver = observer;
     }
 }
-
 module.exports = Plugin;
