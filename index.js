@@ -77,8 +77,10 @@ class Plugin extends siyuan.Plugin {
                 const allShown = Array.from(masks).every(mask => mask.classList.contains('QYLImgMaskRectShow'));
                 if (allShown) {
                     showAllButton.classList.add('QYLImgMaskShowAllActive');
+                    showAllButton.setAttribute('aria-label', this.i18n.imgMaskShowAll || '恢复全部遮罩');
                 } else {
                     showAllButton.classList.remove('QYLImgMaskShowAllActive');
+                    showAllButton.setAttribute('aria-label', this.i18n.imgMaskHideAll || '隐藏全部遮罩');
                 }
             }
         }
@@ -95,8 +97,10 @@ class Plugin extends siyuan.Plugin {
                     const allShown = Array.from(masks).every(m => m.classList.contains('QYLImgMaskRectShow'));
                     if (allShown) {
                         showAllButton.classList.add('QYLImgMaskShowAllActive');
+                        showAllButton.setAttribute('aria-label', this.i18n.imgMaskShowAll || '恢复全部遮罩');
                     } else {
                         showAllButton.classList.remove('QYLImgMaskShowAllActive');
+                        showAllButton.setAttribute('aria-label', this.i18n.imgMaskHideAll || '隐藏全部遮罩');
                     }
                 }
             }
@@ -153,7 +157,8 @@ class Plugin extends siyuan.Plugin {
     }
     createShowAllButton(img, dragMode) {
         const showAllSpan = document.createElement('span');
-        showAllSpan.className = 'protyle-custom QYLImgMaskShowAll';
+        showAllSpan.className = 'protyle-custom QYLImgMaskShowAll b3-tooltips b3-tooltips__nw';
+        showAllSpan.setAttribute('aria-label', this.i18n.imgMaskHideAll || '隐藏全部遮罩');
         showAllSpan.innerHTML = '<span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconRiffCard"></use></svg></span>';
         setTimeout(() => {
             const masks = img.parentNode.querySelectorAll('.QYLImgMaskRect');
@@ -161,8 +166,10 @@ class Plugin extends siyuan.Plugin {
                 const allShown = Array.from(masks).every(mask => mask.classList.contains('QYLImgMaskRectShow'));
                 if (allShown) {
                     showAllSpan.classList.add('QYLImgMaskShowAllActive');
+                    showAllSpan.setAttribute('aria-label', this.i18n.imgMaskShowAll || '恢复全部遮罩');
                 } else {
                     showAllSpan.classList.remove('QYLImgMaskShowAllActive');
+                    showAllSpan.setAttribute('aria-label', this.i18n.imgMaskHideAll || '隐藏全部遮罩');
                 }
             }
         }, 0);
@@ -181,8 +188,10 @@ class Plugin extends siyuan.Plugin {
                 });
                 if (allShown) {
                     showAllSpan.classList.remove('QYLImgMaskShowAllActive');
+                    showAllSpan.setAttribute('aria-label', this.i18n.imgMaskHideAll || '隐藏全部遮罩');
                 } else {
                     showAllSpan.classList.add('QYLImgMaskShowAllActive');
+                    showAllSpan.setAttribute('aria-label', this.i18n.imgMaskShowAll || '恢复全部遮罩');
                 }
             }
         }.bind(this));
@@ -317,7 +326,8 @@ class Plugin extends siyuan.Plugin {
                     }
                     if (!ancestor) return;
                     const span = document.createElement('span');
-                    span.className = 'protyle-custom QYLImgMaskButton';
+                    span.className = 'protyle-custom QYLImgMaskButton b3-tooltips b3-tooltips__nw';
+                    span.setAttribute('aria-label', this.i18n.imgMaskEditMode || '遮罩编辑');
                     span.innerHTML = '<span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMark"></use></svg></span>';
                     let dragMode = { value: false };
                     this.setupCreateMaskHandler(img, ancestor, maskDataList, () => dragMode.value, () => {});
@@ -332,12 +342,14 @@ class Plugin extends siyuan.Plugin {
                         dragMode.value = !dragMode.value;
                         if (dragMode.value) {
                             span.classList.add('QYLImgMaskButtonActive');
+                            span.setAttribute('aria-label', self.i18n.imgMaskExitEditMode || '退出遮罩编辑');
                             img.style.userSelect = 'none';
                             img.style.pointerEvents = '';
                             img.draggable = false;
                             img.parentNode.classList.add('QYLImgEdit');
                         } else {
                             span.classList.remove('QYLImgMaskButtonActive');
+                            span.setAttribute('aria-label', self.i18n.imgMaskEditMode || '遮罩编辑');
                             img.style.userSelect = '';
                             img.style.pointerEvents = '';
                             img.draggable = true;

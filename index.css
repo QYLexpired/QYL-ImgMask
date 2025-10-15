@@ -1,3 +1,6 @@
+.protyle-wysiwyg [data-node-id] .img--select {
+    filter: none;
+}
 .QYLImgMaskRect {
     z-index: 1;
     background: var(--b3-theme-primary);
@@ -58,18 +61,21 @@ body:not(.QYLmobile) .protyle-wysiwyg[contenteditable="false"] {
     display: flex;
     top: 4px;
     left: 4px;
-    filter: saturate(0);
     width: fit-content;
     &.QYLImgMaskShowAll {
         left: 32px;
     }
     &.QYLImgMaskButtonActive {
         opacity: 1;
-        filter: saturate(1);
+        & .protyle-icon {
+            background-color: var(--b3-theme-primary);
+        }
     }
     &.QYLImgMaskShowAllActive {
         opacity: 1;
-        filter: saturate(1);
+        & .protyle-icon {
+            background-color: var(--b3-theme-primary);
+        }
     }
 }
 span:not(:hover) > :is(.QYLImgMaskButton, .QYLImgMaskShowAll) {
