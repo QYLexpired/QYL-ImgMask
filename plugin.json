@@ -2,7 +2,7 @@
   "name": "QYL-ImgMask",
   "author": "QYL",
   "url": "https://github.com/QYLexpired/QYL-ImgMask",
-  "version": "1.0",
+  "version": "1.1",
   "minAppVersion": "3.3.0",
   "backends": [
     "all"
