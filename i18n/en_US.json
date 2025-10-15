@@ -1,3 +1,7 @@
 {
-  "imgMaskMaskTooSmall": "Mask size cannot be less than 15 pixels"
+  "imgMaskMaskTooSmall": "Mask size cannot be less than 15 pixels",
+  "imgMaskEditMode": "Edit Mask",
+  "imgMaskExitEditMode": "Exit Mask Edit",
+  "imgMaskHideAll": "Hide All Masks",
+  "imgMaskShowAll": "Show All Masks"
 }

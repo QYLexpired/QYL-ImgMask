@@ -1,3 +1,7 @@
 {
-  "imgMaskMaskTooSmall": "遮罩尺寸不能小于15像素"
+  "imgMaskMaskTooSmall": "遮罩尺寸不能小于15像素",
+  "imgMaskEditMode": "遮罩编辑",
+  "imgMaskExitEditMode": "退出遮罩编辑",
+  "imgMaskHideAll": "隐藏全部遮罩",
+  "imgMaskShowAll": "恢复全部遮罩"
 }
